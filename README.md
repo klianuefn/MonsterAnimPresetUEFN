@@ -54,11 +54,6 @@ Custom animations must be exposed to Verse through **asset reflection** so they 
 
 # UEFN NPC Animations preset (Escape Lama UEFN Map)
 
-<img width="1999" height="1164" alt="image" src="https://github.com/user-attachments/assets/4d4db859-5b23-4f0f-a449-223bd5f13956" />
-
-<img width="931" height="830" alt="image" src="https://github.com/user-attachments/assets/1454da21-f01e-45a0-859a-2447d0f8cb5d" />
-
-
 ## ESCAPE LAMA [HORROR] HALLOWEEN LLAMA
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1b3a1402-5435-4a3c-8041-55ff4d651a37" />
@@ -67,20 +62,21 @@ Developed by [Klian](https://x.com/kliansenpai) and [Engineers.FN](https://x.com
 
 # CODE: [3891-5899-6094](https://www.fortnite.com/play/island/3891-5899-6094?lang=en-US)
 
-## How to:
+## HOW TO:
 
-### Clone the repo or download .zip file.
-<img width="933" height="470" alt="image" src="https://github.com/user-attachments/assets/d660a2c8-f911-4c07-8844-74bf0cbed6d4" />
+The files in this folder are meant to be used **inside an NPC Character Definition**. The NPC Character Definition is the asset that defines the look and details of an NPC spawned by the **NPC Spawner** device.
 
------
+To give an NPC a custom skin:
 
-### Move content folder into your project.
-<img width="1603" height="346" alt="image" src="https://github.com/user-attachments/assets/fc28cddc-ff51-47fb-80e8-ecfdc23f45a8" />
+1. **Create a Blueprint Actor with a Skeletal Mesh Component inside it.** That skeletal mesh becomes the NPC's new skin.
+2. **Create an Anim Preset** with the movement animations and the right settings for a good result in game.
+3. **Assign a Cosmetic NPC Modifier** in the NPC Character Definition, choose **Custom**, and set the two files you just created (the Blueprint Actor and the Anim Preset).
 
------
+The plugin includes working examples for all of these steps, built on the mannequin that already ships with the Animation Template provided by Epic Games.
 
-### Allow Assets
-<img width="661" height="558" alt="image" src="https://github.com/user-attachments/assets/c457507f-3edd-4165-ad1c-b87f8f3bff2d" />
+<img width="1999" height="1164" alt="image" src="https://github.com/user-attachments/assets/4d4db859-5b23-4f0f-a449-223bd5f13956" />
+
+<img width="931" height="830" alt="image" src="https://github.com/user-attachments/assets/1454da21-f01e-45a0-859a-2447d0f8cb5d" />
 
 -----
 
@@ -101,12 +97,6 @@ Developed by [Klian](https://x.com/kliansenpai) and [Engineers.FN](https://x.com
 
 ### NPC Spawner
 <img width="1293" height="1062" alt="image" src="https://github.com/user-attachments/assets/9f50fe2e-3d5c-4409-bf19-20da97cbe2fe" />
-
------
-
-### Launch and run Fix-up
-<img width="354" height="121" alt="image" src="https://github.com/user-attachments/assets/f947f57c-cfbe-4093-b012-1127d5859bdb" />
-<img width="1489" height="943" alt="image" src="https://github.com/user-attachments/assets/d6bc1cd0-b0b6-405f-b058-89f5a62cda6e" />
 
 -----
 
