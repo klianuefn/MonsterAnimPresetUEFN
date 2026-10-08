@@ -53,6 +53,12 @@ Custom animations must be exposed to Verse through **asset reflection** so they 
 
 
 # UEFN NPC Animations preset (Escape Lama UEFN Map)
+
+<img width="1999" height="1164" alt="image" src="https://github.com/user-attachments/assets/4d4db859-5b23-4f0f-a449-223bd5f13956" />
+
+<img width="931" height="830" alt="image" src="https://github.com/user-attachments/assets/1454da21-f01e-45a0-859a-2447d0f8cb5d" />
+
+
 ## ESCAPE LAMA [HORROR] HALLOWEEN LLAMA
 
 <img width="1920" height="1080" alt="image" src="https://github.com/user-attachments/assets/1b3a1402-5435-4a3c-8041-55ff4d651a37" />
