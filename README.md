@@ -1,3 +1,57 @@
+# Custom Blueprint NPCs: quick guide
+
+> Summary of Epic's official documentation. Source material: [Using the NPC Spawner with Animations](https://dev.epicgames.com/documentation/fortnite/using-the-npc-spawner-with-animations-in-unreal-editor-for-fortnite) (Fortnite Documentation, Epic Developer Community). The feature is in **Early Access**: islands can be published, but future updates may break them and require your intervention.
+
+## What a Custom Blueprint NPC is
+
+An NPC is defined by an **NPC Character Definition** and placed in the level with an **NPC Spawner** device. When the definition uses a **custom Blueprint** instead of a plain character, Sequencer treats it differently:
+
+- Most NPC types bind in Sequencer as a simple **skeletal mesh**.
+- A custom Blueprint NPC binds as the **whole Blueprint**, so its extra components (for example Niagara VFX) are exposed and can be keyed in Sequencer. Epic's example animates a Niagara system to make the NPC's head explode.
+
+## Bringing the NPC into a sequence
+
+An NPC Spawner used in a sequence needs a **Binding Lifetime** track (click **+** next to the NPC Spawner in the track list, then **Binding Lifetime**). Epic notes it cannot be added retroactively to sequences created before UEFN 31.00, and islands using an NPC Spawner in a sequence must be republished after the track is added.
+
+There are two ways to bind an NPC, both created from the NPC Character Definition:
+
+1. **Spawnable NPC binding**: drag the NPC Character Definition into Sequencer. The sequence spawns the NPC itself and you animate it like any skeletal mesh (add an animation or emote with **+ Animation**, move it and keyframe positions). No extra setup is needed to play it.
+2. **Replaceable NPC binding**: create a spawnable binding, right click it and choose **Convert selected binding to > Replaceable NPC Character**. The sequence takes control of an NPC already spawned in the world. While bound, its behavior, perception and path following are paused. When unbound, they resume and the NPC goes back to its original location.
+   - Add the **Sequencer modifier** to the NPC Character Definition, otherwise validation fails.
+   - The modifier's **Unique Identifier** (default: the definition name) is used to find the NPC in game. Definitions sharing the same identifier can all be bound.
+   - An NPC Spawner using that definition must exist in the level. If no NPC is found, the client log shows `LogFortNPCMovieSceneBindings: Warning: Could not bind to a pawn using NPC Character Definition ...`.
+   - If the NPC spawns at the same moment the sequence should start, use a spawnable binding, or connect the spawner's **On Spawned** event to the Cinematic Sequence device's **Play**.
+
+Play the sequence in game with a **Cinematic Sequence** device.
+
+## Animating in Sequencer
+
+1. Create a **Level Sequence** in the Content Browser and open it.
+2. **+Track > Actor to Sequencer > NPC Spawner** (or drag the spawner from the Outliner).
+3. Click **+** next to the spawner and pick **Control Rig > Control Rig Classes > FK Control Rig** to key individual bones, or **Animation** to add an imported FBX animation sequence.
+4. Key the bones over the timeline, preview, then right click the spawner and choose **Bake Animation Sequence**. Check that limbs do not clip through the body.
+
+Animations imported from Unreal Engine (MetaHumans included) may need **retargeting** to the Fortnite skeleton. MetaHumans are memory heavy, so use them sparingly.
+
+## Known restrictions (replaceable bindings)
+
+- The Cinematic Sequence device must use **Visibility: Everyone**.
+- Rideable or tameable wildlife NPCs fail validation.
+- **Force Keep State** in the Finish Completion State Override option fails validation.
+- The NPC snaps into place when bound, and latency can cause brief visual glitches on bind and unbind. Hide it with off screen spawns, screen fades, VFX or the visibility track.
+
+## Playing animations from Verse
+
+Custom animations must be exposed to Verse through **asset reflection** so they appear in `Assets.digest.verse`. Then, from an `npc_behavior`:
+
+- Get the `play_animation_controller` with `GetPlayAnimationController()`.
+- `PlayAndAwait(Animation)` plays asynchronously and returns `play_animation_result` (`Completed`, `Interrupted`, `Error`).
+- `Play(Animation)` returns a `playing_animation_instance` with `GetState()`, `Stop()`, `Await()` and the events `CompletedEvent`, `InterruptedEvent`, `BlendedInEvent`, `BlendingOutEvent`.
+- Optional parameters: `PlayRate` (default 1.0), `BlendInTime`, `BlendOutTime`, `StartPositionSeconds`.
+
+---
+
+
 # UEFN NPC Animations preset (Escape Lama UEFN Map)
 ## ESCAPE LAMA [HORROR] HALLOWEEN LLAMA
 
